@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Хранилище foodshopModelContainer" CdmEntityContainer="foodshopEntities">
+    <EntitySetMapping Name="CategoryTovara">
+      <EntityTypeMapping TypeName="foodshopModel.CategoryTovara">
+        <MappingFragment StoreEntitySet="CategoryTovara">
+          <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Order">
+      <EntityTypeMapping TypeName="foodshopModel.Order">
+        <MappingFragment StoreEntitySet="Order">
+          <ScalarProperty Name="Number" ColumnName="Number" />
+          <ScalarProperty Name="DataOrder" ColumnName="DataOrder" />
+          <ScalarProperty Name="DataShipment" ColumnName="DataShipment" />
+          <ScalarProperty Name="StatusOrder" ColumnName="StatusOrder" />
+          <ScalarProperty Name="NameOrganizationPostavshik_FK_" ColumnName="NameOrganizationPostavshik(FK)" />
+          <ScalarProperty Name="FIOworker_FK_" ColumnName="FIOworker(FK)" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Postavshik">
+      <EntityTypeMapping TypeName="foodshopModel.Postavshik">
+        <MappingFragment StoreEntitySet="Postavshik">
+          <ScalarProperty Name="NameOrganization" ColumnName="NameOrganization" />
+          <ScalarProperty Name="FIOdirector" ColumnName="FIOdirector" />
+          <ScalarProperty Name="INN" ColumnName="INN" />
+          <ScalarProperty Name="NumberAccount" ColumnName="NumberAccount" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tovar">
+      <EntityTypeMapping TypeName="foodshopModel.Tovar">
+        <MappingFragment StoreEntitySet="Tovar">
+          <ScalarProperty Name="Count" ColumnName="Count" />
+          <ScalarProperty Name="CodTovara" ColumnName="CodTovara" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="DateExpiration" ColumnName="DateExpiration" />
+          <ScalarProperty Name="Category" ColumnName="Category" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Worker">
+      <EntityTypeMapping TypeName="foodshopModel.Worker">
+        <MappingFragment StoreEntitySet="Worker">
+          <ScalarProperty Name="Login" ColumnName="Login" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="FIO" ColumnName="FIO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Write">
+      <EntityTypeMapping TypeName="foodshopModel.Write">
+        <MappingFragment StoreEntitySet="Write">
+          <ScalarProperty Name="DataWrite" ColumnName="DataWrite" />
+          <ScalarProperty Name="NumberAct" ColumnName="NumberAct" />
+          <ScalarProperty Name="FIOworker_FK_" ColumnName="FIOworker(FK)" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LineOrder">
+      <EntityTypeMapping TypeName="foodshopModel.LineOrder">
+        <MappingFragment StoreEntitySet="LineOrder">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="CountOrder" ColumnName="CountOrder" />
+          <ScalarProperty Name="PurchasePrice" ColumnName="PurchasePrice" />
+          <ScalarProperty Name="CountShipment" ColumnName="CountShipment" />
+          <ScalarProperty Name="CodTovara_FK_" ColumnName="CodTovara(FK)" />
+          <ScalarProperty Name="NumberOrder_FK_" ColumnName="NumberOrder(FK)" />
+          <ScalarProperty Name="DataManuf" ColumnName="DataManuf" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LineWrite">
+      <EntityTypeMapping TypeName="foodshopModel.LineWrite">
+        <MappingFragment StoreEntitySet="LineWrite">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Summa" ColumnName="Summa" />
+          <ScalarProperty Name="Count" ColumnName="Count" />
+          <ScalarProperty Name="NumberActWrite_FK_" ColumnName="NumberActWrite(FK)" />
+          <ScalarProperty Name="CodTovara_FK_" ColumnName="CodTovara(FK)" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

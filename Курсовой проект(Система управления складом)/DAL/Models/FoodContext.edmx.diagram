@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="be532a7b0f704c5e9b98e2f37d55b552" Name="Diagram1">
+        <EntityTypeShape EntityType="foodshopModel.CategoryTovara" Width="1.5" PointX="0.75" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="foodshopModel.Order" Width="1.5" PointX="3" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="foodshopModel.Postavshik" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="foodshopModel.Tovar" Width="1.5" PointX="3" PointY="10.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="foodshopModel.Worker" Width="1.5" PointX="0.75" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="foodshopModel.Write" Width="1.5" PointX="3" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="foodshopModel.LineOrder" Width="1.5" PointX="5.25" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="foodshopModel.LineWrite" Width="1.5" PointX="5.25" PointY="7.375" IsExpanded="true" />
+        <AssociationConnector Association="foodshopModel.FK_Товар_Категория_товара" ManuallyRouted="false" />
+        <AssociationConnector Association="foodshopModel.FK_Order_Worker" ManuallyRouted="false" />
+        <AssociationConnector Association="foodshopModel.FK_Заказ_Поставщик" ManuallyRouted="false" />
+        <AssociationConnector Association="foodshopModel.FK_Заказ_Работник_склада" ManuallyRouted="false" />
+        <AssociationConnector Association="foodshopModel.FK_Строка_заказа_Заказ" ManuallyRouted="false" />
+        <AssociationConnector Association="foodshopModel.FK_Строка_акта_списания_Товар" ManuallyRouted="false" />
+        <AssociationConnector Association="foodshopModel.FK_Строка_заказа_Товар" ManuallyRouted="false" />
+        <AssociationConnector Association="foodshopModel.FK_Списание_Работник_склада" ManuallyRouted="false" />
+        <AssociationConnector Association="foodshopModel.FK_Строка_акта_списания_Списание" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

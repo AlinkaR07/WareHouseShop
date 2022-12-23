@@ -1,0 +1,82 @@
+﻿<Window x:Class="Курсовой_проект_Система_управления_складом_.View.AddPostavshik"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Курсовой_проект_Система_управления_складом_.View"
+        mc:Ignorable="d"
+        xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks" xmlns:viewmodel="clr-namespace:Курсовой_проект_Система_управления_складом_.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:AddPostavshikViewModel}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Title="Добавление поставщика" Height="540" Width="720"  WindowStartupLocation="CenterScreen" WindowStyle="None" AllowsTransparency="True" Icon="D:\ИГЭУ\3 курс, 1 семестр\Курсовой проект\Курсовой проект(Система управления складом)\Курсовой проект(Система управления складом)\Resources\pngwing.com (2).png">
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVis"/>
+    </Window.Resources>
+    <Border Background="#eff2f7" BorderThickness="2" BorderBrush="Black"  CornerRadius="3" MouseDown="Border_MouseDown" MouseLeftButtonDown="Border_MouseLeftDown" >
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!--левое меню-->
+
+            <!--левое меню-->
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+            </Grid>
+
+
+            <Border Background="#623ed0" CornerRadius="0 50 0 0" Margin="0,0,500,0" Grid.ColumnSpan="2">
+                <DockPanel>
+
+                    <!--menu buttons-->
+
+                    <StackPanel DockPanel.Dock="Top" Margin="-5 100 0 0">
+                        <Button Style="{StaticResource FunctionButton}" Command="{Binding AddPostavshik}" Margin="30,350,0,15">
+                            <StackPanel Orientation="Horizontal">
+                                <Icon:PackIconMaterial Kind="ContentSaveCheck" Style="{StaticResource menuButtonIcon}"/>
+                                <TextBlock Text="Сохранить" Margin="0 0 10 0"/>
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+                </DockPanel>
+            </Border>
+
+            <!--main Section-->
+            <Grid Grid.Column="1" Margin="30 20 20 20">
+
+                <!--Top button-->
+                <Button Style="{StaticResource topButton}" Margin="0,0,9.8,476.8"  HorizontalAlignment="Right" Click="ButtonCloseForm_Click" Height="Auto" Width="20">
+                    <Icon:PackIconMaterial Kind="WindowClose" Height="10" Width="10"/>
+                </Button>
+
+                <Button Style="{StaticResource topButton}" Margin="0,0,34.8,476.8"  HorizontalAlignment="Right" Click="ButtonMinimized_Click" Height="Auto" Width="20">
+                    <Icon:PackIconMaterial Kind="WindowMinimize" Height="10" Width="10"/>
+                </Button>
+
+
+                <TextBlock Text="Название организации" FontSize="18" FontWeight="SemiBold" Margin="15,50,0,420"
+                          HorizontalAlignment="Left" Foreground="#121518"/>
+                <TextBox x:Name="NameOrganization" Text="{Binding Name}" Style="{StaticResource textboxFilter}" Foreground="Black" Margin="10,80,10,395" Height="30"/>
+                <TextBlock Text="ФИО директора" FontSize="18" FontWeight="SemiBold" Margin="15,130,0,320"
+                          HorizontalAlignment="Left" Foreground="#121518"/>
+                <TextBox x:Name="FIOdirector" Text="{Binding FIO}" Style="{StaticResource textboxFilter}" Foreground="Black" Margin="10,160,10,310" Height="30"/>
+                <TextBlock Text="ИНН" FontSize="18" FontWeight="SemiBold" Margin="15,220,0,250"
+                          HorizontalAlignment="Left" Foreground="#121518"/>
+                <TextBox x:Name="INN" Text="{Binding INN}" Style="{StaticResource textboxFilter}" Foreground="Black" Margin="10,255,10,215" Height="30"/>
+                <TextBlock Text="Номер счёта" FontSize="18" FontWeight="SemiBold" Margin="15,320,0,147"
+                          HorizontalAlignment="Left" Foreground="#121518"/>
+                <TextBox x:Name="NumberAccount" Text="{Binding Account}" Style="{StaticResource textboxFilter}" Foreground="Black" Margin="9,353,10,117" Height="30"/>
+            </Grid>
+        </Grid>
+    </Border>
+</Window>
+

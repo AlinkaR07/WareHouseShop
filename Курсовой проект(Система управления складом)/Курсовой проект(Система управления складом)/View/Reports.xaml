@@ -1,0 +1,264 @@
+﻿<Page
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Курсовой_проект_Система_управления_складом_.View"
+       xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:viewmodel="clr-namespace:Курсовой_проект_Система_управления_складом_.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:Reports1ViewModel}" x:Class="Курсовой_проект_Система_управления_складом_.View.Reports"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Title="Отчеты" Height="720" Width="1080">
+    <Page.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVis"/>
+    </Page.Resources>
+    <Border Background="#eff2f7" CornerRadius="30">
+        <!--MouseDown="Border_MouseDown_Write" MouseLeftButtonDown="Border_MouseLeftDown_Write"-->
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!--левое меню-->
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+            </Grid>
+
+            <Border Background="#623ed0" CornerRadius="0 50 0 30" Margin="0,0,855,0" Grid.ColumnSpan="2">
+                <DockPanel>
+
+                    <!--menu buttons-->
+
+                    <!--Menu Icon-->
+                    <ToggleButton  Margin="10 28 0 650" Style="{StaticResource topToggelebutton}">
+                        <Icon:PackIconMaterial Kind="Menu" Width="15" Height="15"/>
+                    </ToggleButton>
+
+                    <!--меню логин-->
+                    <Border Width="80" Height="80" Padding="3" Background="White" CornerRadius="100" DockPanel.Dock="Top" HorizontalAlignment="Left" Margin="20 100 0 0">
+                        <Ellipse>
+                            <Ellipse.Fill>
+                                <ImageBrush ImageSource="D:\ИГЭУ\3 курс, 1 семестр\Курсовой проект\Курсовой проект(Система управления складом)\Курсовой проект(Система управления складом)\Resources\logo.png"/>
+                            </Ellipse.Fill>
+                        </Ellipse>
+                    </Border>
+
+                    <!--menu titles-->
+                    <TextBlock Text="Прокофьева Е.И." Foreground="White" FontSize="22" FontWeight="SemiBold" DockPanel.Dock="Top" TextAlignment="Center" Margin="-50 25 0 10"/>
+                    <TextBlock Text="Работник склада" Foreground="#d0bfff" FontSize="14" FontWeight="SemiBold" DockPanel.Dock="Top" TextAlignment="Center" Margin="-50 0 0 0"/>
+
+                    <!--menu seprator-->
+
+                    <Separator Margin="-10 30 30 0" DockPanel.Dock="Top" Height="1.5" Background="#7e5fdc"/>
+
+                    <StackPanel DockPanel.Dock="Top" Margin="-40 0 0 0">
+                        <Button  Style="{StaticResource menuButton}">
+                            <StackPanel Orientation="Horizontal">
+                                <Icon:PackIconMaterial Kind="HomeVariant" Style="{StaticResource menuButtonIcon}"/>
+                                <TextBlock Text="Главная страница" Margin="0 0 10 0" Width="142"/>
+                            </StackPanel>
+                        </Button>
+
+                        <Button Style="{StaticResource menuButton}" Command="{Binding OpenTovarPage}">
+                            <StackPanel Orientation="Horizontal">
+                                <Icon:PackIconMaterial Kind="Food" Style="{StaticResource menuButtonIcon}"/>
+                                <TextBlock Text="Товары" Margin="0 0 10 0"/>
+                            </StackPanel>
+                        </Button>
+
+                        <Button Style="{StaticResource menuButton}" Command="{Binding OpenOrderPage}">
+                            <StackPanel Orientation="Horizontal">
+                                <Icon:PackIconMaterial Kind="CalendarClock" Style="{StaticResource menuButtonIcon}"/>
+                                <TextBlock Text="Заказы" Margin="0 0 10 0"/>
+                            </StackPanel>
+                        </Button>
+
+                        <Button Style="{StaticResource menuButton}">
+                            <StackPanel Orientation="Horizontal">
+                                <Icon:PackIconMaterial Kind="AccountMultipleOutline" Style="{StaticResource menuButtonIcon}"/>
+                                <TextBlock Text="Поставщики" Margin="0 0 10 0"/>
+                            </StackPanel>
+                        </Button>
+
+                        <Button Style="{StaticResource menuButton}" Command="{Binding OpenWritePage}">
+                            <StackPanel Orientation="Horizontal">
+                                <Icon:PackIconMaterial Kind="ApplicationEditOutline" Style="{StaticResource menuButtonIcon}"/>
+                                <TextBlock Text="Акты списания" Margin="0 0 10 0"/>
+                            </StackPanel>
+                        </Button>
+
+                        <Button Style="{StaticResource menuButton}" Command="{Binding OpenReportsPage}">
+                            <StackPanel Orientation="Horizontal">
+                                <Icon:PackIconMaterial Kind="BookCheckOutline" Style="{StaticResource menuButtonIcon}"/>
+                                <TextBlock Text="Отчеты" Margin="0 0 10 0"/>
+                            </StackPanel>
+                        </Button>
+
+
+                    </StackPanel>
+                </DockPanel>
+            </Border>
+
+
+            <!--main Section-->
+            <Grid Grid.Column="1" Margin="30 20 20 20">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+
+
+                <!--Top button-->
+                <Button Style="{StaticResource topButton}" Margin="0,10,20,52.8"  HorizontalAlignment="Right" Click="ButtonClose_Click" Grid.RowSpan="2">
+                    <Icon:PackIconMaterial Kind="WindowClose"/>
+                </Button>
+
+                <Button Style="{StaticResource topButton}" Margin="0,10,55,52.8" HorizontalAlignment="Right" Click="ButtonMinimized_Click" Grid.RowSpan="2" Height="Auto">
+                    <Icon:PackIconMaterial Kind="WindowMinimize"/>
+                </Button>
+
+
+                <!--Page Title-->
+                <TextBlock Text="Отчеты" FontSize="32" FontWeight="SemiBold" Margin="308,46,308,0" 
+                           HorizontalAlignment="Center" Height="47" VerticalAlignment="Top"  Foreground="#121518" Grid.RowSpan="6"/>
+                <!--Separator-->
+                <Separator Height="1" Grid.Row="3" Background="#dae2ea" Margin="0 -1 0 10" />
+                <TabControl Margin="0,8.2,0,10" Grid.Row="3" Grid.RowSpan="3">
+                    <TabItem Header="Отчет о количестве " ToolTip="Отчет о количестве товаров" Style="{DynamicResource TabItemStyle}" Margin="0,0,-1.8,0" Width="134">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="14*"/>
+                                <ColumnDefinition Width="61*"/>
+                            </Grid.ColumnDefinitions>
+                            <!--Members DataGrid-->
+                            <TextBlock Text="Вывод товаров, количество которых меньше " FontSize="18" FontWeight="SemiBold" Margin="10,8,420.8,0" 
+                           HorizontalAlignment="Center" Height="23" VerticalAlignment="Top"  Foreground="#121518" Grid.ColumnSpan="2" Width="394"/>
+                            <TextBox Name="CountText" Style="{StaticResource textboxFilter}" Text="{Binding CountText, Mode=TwoWay}"  Foreground="Black" Margin="250.4,8,380.8,493.2" Height="30" Grid.Column="1"/>
+                            <TextBlock Text="штук " FontSize="18" FontWeight="SemiBold" Margin="296.4,8,324.8,0" 
+                           HorizontalAlignment="Center" Height="23" VerticalAlignment="Top"  Foreground="#121518" Width="50" Grid.Column="1"/>
+                            <Button Style="{StaticResource addButton}" Command="{Binding ReportCountTovar}" Margin="0,6,196.8,500.2" Width="93" Grid.Column="1" Grid.Row="0" Height="Auto" >
+                                <StackPanel Orientation="Horizontal">
+                                    <Icon:PackIconMaterial Kind="FileCheckOutline" VerticalAlignment="Center" Width="11" Height="15" Margin="0 1 8 0"/>
+                                    <TextBlock Text="Вывести"/>
+                                </StackPanel>
+                            </Button>
+                            <Button Style="{StaticResource addButton}" Command="{Binding ReportAllTovar}" Margin="0,6,9.8,500.2" Width="168" Grid.Column="1" Grid.Row="0" Height="Auto" >
+                                <StackPanel Orientation="Horizontal">
+                                    <Icon:PackIconMaterial Kind="FileCheckOutline" VerticalAlignment="Center" Width="11" Height="15" Margin="0 1 8 0"/>
+                                    <TextBlock Text="Вывести все товары"/>
+                                </StackPanel>
+                            </Button>
+                            <DataGrid ItemsSource="{Binding listReports1}" RowStyle="{DynamicResource DataGridRowStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" Style="{DynamicResource DataGridStyle1}" x:Name="Reports1" Margin="0,55,-0.2,10.2" Grid.ColumnSpan="2">
+                                <DataGrid.Columns>
+                                    <DataGridCheckBoxColumn CanUserReorder="False" Width="auto" ElementStyle="{StaticResource CheckBoxStyle1}">
+                                        <DataGridCheckBoxColumn.HeaderTemplate>
+                                            <DataTemplate>
+                                                <CheckBox Style="{StaticResource CheckBoxStyle1}"/>
+                                            </DataTemplate>
+                                        </DataGridCheckBoxColumn.HeaderTemplate>
+                                    </DataGridCheckBoxColumn>
+
+                                    <DataGridTextColumn Header="Наименование товара" IsReadOnly="True" Width="210" Binding="{Binding Name}"/>
+                                    <DataGridTextColumn Header="Количество" IsReadOnly="True" CanUserResize="False" Width="110" Binding="{Binding Count}"/>
+                                    <DataGridTextColumn Header="Срок годности" IsReadOnly="True" Width="142" Binding="{Binding DateExpiration}"/>
+                                    <DataGridTextColumn Header="Категория" IsReadOnly="True" Width="130" Binding="{Binding Category}"/>
+                                    <DataGridTextColumn Header="Цена" IsReadOnly="True" Width="100" Binding="{Binding Price}"/>
+                                    <materialDesign:DataGridComboBoxColumn/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </Grid>
+                    </TabItem>
+                    <TabItem Header="Отчет о сроках " Style="{DynamicResource TabItemStyle}" ToolTip="Отчет о сроках годности товаров" Margin="-0.4,0,0,0" Width="116">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="103*"/>
+                                <ColumnDefinition Width="172*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="Список товаров, срок годности которых заканчивается через" FontSize="18" FontWeight="SemiBold" Margin="11,10,197.8,0" 
+                           HorizontalAlignment="Center" Height="25" VerticalAlignment="Top"  Foreground="#121518" Width="616" Grid.ColumnSpan="2"/>
+                            <TextBox Name="DateText" Style="{StaticResource textboxFilter}" Text="{Binding DateText, Mode=TwoWay}" Foreground="Black" Margin="233.9,10,241.8,491.2" Height="30" Grid.Column="1"/>
+                            <TextBlock Text="дней" FontSize="18" FontWeight="SemiBold" Margin="294.9,10,170.8,0" 
+                           HorizontalAlignment="Center" Height="23" VerticalAlignment="Top"  Foreground="#121518" Width="50" Grid.Column="1"/>
+                            <Button Style="{StaticResource addButton}" Command="{Binding ReportDateTovar}" Margin="0,10,9.8,496.2" Width="95" Grid.Row="0" Height="Auto" Click="Button_Click1" Grid.Column="1">
+                                <StackPanel Orientation="Horizontal">
+                                    <Icon:PackIconMaterial Kind="FileCheckOutline" VerticalAlignment="Center" Width="11" Height="15" Margin="0 1 8 0"/>
+                                    <TextBlock Text="Вывести"/>
+                                </StackPanel>
+                            </Button>
+                            <!--Members DataGrid-->
+                            <DataGrid ItemsSource="{Binding listReports2}" RowStyle="{DynamicResource DataGridRowStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" Style="{DynamicResource DataGridStyle1}" x:Name="Reports2" Margin="0,58,-0.2,0.2" Grid.ColumnSpan="2">
+                                <DataGrid.Columns>
+                                    <DataGridCheckBoxColumn CanUserReorder="False" Width="auto" ElementStyle="{StaticResource CheckBoxStyle1}">
+                                        <DataGridCheckBoxColumn.HeaderTemplate>
+                                            <DataTemplate>
+                                                <CheckBox Style="{StaticResource CheckBoxStyle1}"/>
+                                            </DataTemplate>
+                                        </DataGridCheckBoxColumn.HeaderTemplate>
+                                    </DataGridCheckBoxColumn>
+
+                                    <DataGridTextColumn Header="Наименование товара" IsReadOnly="True" Width="210" Binding="{Binding Name}"/>
+                                    <DataGridTextColumn Header="Количество" IsReadOnly="True" CanUserResize="False" Width="110" Binding="{Binding Count}"/>
+                                    <DataGridTextColumn Header="Срок годности" IsReadOnly="True" Width="142" Binding="{Binding DateExpiration}"/>
+                                    <DataGridTextColumn Header="Категория" IsReadOnly="True" Width="130" Binding="{Binding Category}"/>
+                                    <DataGridTextColumn Header="Цена" IsReadOnly="True" Width="100" Binding="{Binding Price}"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </Grid>
+                    </TabItem>
+                    <TabItem Header="Отчет об актах списания   " ToolTip="Отчет об актах списания" Style="{DynamicResource TabItemStyle}" Margin="0.4,0,-16.4,0" Width="116">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="13*"/>
+                                <ColumnDefinition Width="42*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="Акты списания сформированные с " FontSize="18" FontWeight="SemiBold" Margin="11,10,513.8,0" 
+                           HorizontalAlignment="Center" Height="25" VerticalAlignment="Top"  Foreground="#121518" Width="300" Grid.ColumnSpan="2"/>
+                            <DatePicker Margin="126.8,10,393.8,496.2" Grid.Column="1" SelectedDate="{Binding DateWrite1}"/>
+                            <TextBlock Text="по" FontSize="18" FontWeight="SemiBold" Margin="240.8,10,366.8,0" 
+                           HorizontalAlignment="Center" Height="25" VerticalAlignment="Top"  Foreground="#121518" Width="22" Grid.Column="1"/>
+                            <DatePicker Margin="267.8,10,252.8,496.2" Grid.Column="1" SelectedDate="{Binding DateWrite2}"/>
+                            <Button Style="{StaticResource addButton}" Command="{Binding ReportDateWrite}" Margin="0,10,21.8,496.2" Width="95" Grid.Row="0" Height="Auto" Click="Button_Click2" Grid.Column="1">
+                                <StackPanel Orientation="Horizontal">
+                                    <Icon:PackIconMaterial Kind="FileCheckOutline" VerticalAlignment="Center" Width="11" Height="15" Margin="0 1 8 0"/>
+                                    <TextBlock Text="Вывести"/>
+                                </StackPanel>
+                            </Button>
+                            <!--Members DataGrid-->
+                            <DataGrid ItemsSource="{Binding listReports3}" RowStyle="{DynamicResource DataGridRowStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" Style="{DynamicResource DataGridStyle1}" x:Name="Reports3" Margin="0,50,-0.2,0.2" Grid.ColumnSpan="2">
+                                <DataGrid.Columns>
+                                    <DataGridCheckBoxColumn CanUserReorder="False" Width="auto" ElementStyle="{StaticResource CheckBoxStyle1}">
+                                        <DataGridCheckBoxColumn.HeaderTemplate>
+                                            <DataTemplate>
+                                                <CheckBox Style="{StaticResource CheckBoxStyle1}"/>
+                                            </DataTemplate>
+                                        </DataGridCheckBoxColumn.HeaderTemplate>
+                                    </DataGridCheckBoxColumn>
+                                    <DataGridTextColumn Header="Дата списания" IsReadOnly="True" Width="0.8*" Binding="{Binding DataWrite}"/>
+                                    <DataGridTextColumn Header="Наименование товара" IsReadOnly="True" Width="*" Binding="{Binding Name}"/>
+                                    <DataGridTextColumn Header="Количество" IsReadOnly="True" Width="0.7*" Binding="{Binding Count}"/>
+                                    <DataGridTextColumn Header="Сумма" IsReadOnly="True" Width="0.5*" Binding="{Binding Summa}"/>
+                                    <DataGridTextColumn Header="Категория" IsReadOnly="True" Width="0.6*" Binding="{Binding Category}"/>
+                                    <DataGridTextColumn Header="ФИО работника" IsReadOnly="True" Width="*" Binding="{Binding FIOworker_FK_}"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </Grid>
+                    </TabItem>
+                </TabControl>
+            </Grid>
+        </Grid>
+    </Border>
+</Page>

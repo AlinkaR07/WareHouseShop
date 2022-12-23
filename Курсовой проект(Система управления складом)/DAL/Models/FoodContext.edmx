@@ -1,0 +1,600 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Хранилище foodshopModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CategoryTovara">
+          <Key>
+            <PropertyRef Name="CategoryName" />
+          </Key>
+          <Property Name="CategoryName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LineOrder">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="CountOrder" Type="int" Nullable="false" />
+          <Property Name="PurchasePrice" Type="nvarchar" MaxLength="50" />
+          <Property Name="CountShipment" Type="int" />
+          <Property Name="CodTovara(FK)" Type="int" Nullable="false" />
+          <Property Name="NumberOrder(FK)" Type="int" Nullable="false" />
+          <Property Name="DataManuf" Type="date" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LineWrite">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="Summa" Type="float" Nullable="false" />
+          <Property Name="Count" Type="int" Nullable="false" />
+          <Property Name="NumberActWrite(FK)" Type="int" Nullable="false" />
+          <Property Name="CodTovara(FK)" Type="int" Nullable="false" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="Number" />
+          </Key>
+          <Property Name="Number" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DataOrder" Type="date" Nullable="false" />
+          <Property Name="DataShipment" Type="date" />
+          <Property Name="StatusOrder" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="NameOrganizationPostavshik(FK)" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FIOworker(FK)" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Postavshik">
+          <Key>
+            <PropertyRef Name="NameOrganization" />
+          </Key>
+          <Property Name="NameOrganization" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FIOdirector" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="INN" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="NumberAccount" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tovar">
+          <Key>
+            <PropertyRef Name="CodTovara" />
+          </Key>
+          <Property Name="CodTovara" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DateExpiration" Type="datetime" Nullable="false" />
+          <Property Name="Category" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Price" Type="float" Nullable="false" />
+          <Property Name="Count" Type="int" />
+        </EntityType>
+        <EntityType Name="Worker">
+          <Key>
+            <PropertyRef Name="FIO" />
+          </Key>
+          <Property Name="Login" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FIO" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Write">
+          <Key>
+            <PropertyRef Name="NumberAct" />
+          </Key>
+          <Property Name="DataWrite" Type="date" Nullable="false" />
+          <Property Name="NumberAct" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FIOworker(FK)" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Order_Worker">
+          <End Role="Worker" Type="Self.Worker" Multiplicity="1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Worker">
+              <PropertyRef Name="FIO" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="FIOworker(FK)" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Заказ_Поставщик">
+          <End Role="Postavshik" Type="Self.Postavshik" Multiplicity="1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Postavshik">
+              <PropertyRef Name="NameOrganization" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="NameOrganizationPostavshik(FK)" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Заказ_Работник склада">
+          <End Role="Worker" Type="Self.Worker" Multiplicity="1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Worker">
+              <PropertyRef Name="FIO" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="FIOworker(FK)" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Списание_Работник склада">
+          <End Role="Worker" Type="Self.Worker" Multiplicity="1" />
+          <End Role="Write" Type="Self.Write" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Worker">
+              <PropertyRef Name="FIO" />
+            </Principal>
+            <Dependent Role="Write">
+              <PropertyRef Name="FIOworker(FK)" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Строка акта списания_Списание">
+          <End Role="Write" Type="Self.Write" Multiplicity="1" />
+          <End Role="LineWrite" Type="Self.LineWrite" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Write">
+              <PropertyRef Name="NumberAct" />
+            </Principal>
+            <Dependent Role="LineWrite">
+              <PropertyRef Name="NumberActWrite(FK)" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Строка акта списания_Товар">
+          <End Role="Tovar" Type="Self.Tovar" Multiplicity="1" />
+          <End Role="LineWrite" Type="Self.LineWrite" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tovar">
+              <PropertyRef Name="CodTovara" />
+            </Principal>
+            <Dependent Role="LineWrite">
+              <PropertyRef Name="CodTovara(FK)" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Строка заказа_Заказ">
+          <End Role="Order" Type="Self.Order" Multiplicity="1" />
+          <End Role="LineOrder" Type="Self.LineOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="Number" />
+            </Principal>
+            <Dependent Role="LineOrder">
+              <PropertyRef Name="NumberOrder(FK)" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Строка заказа_Товар">
+          <End Role="Tovar" Type="Self.Tovar" Multiplicity="1" />
+          <End Role="LineOrder" Type="Self.LineOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tovar">
+              <PropertyRef Name="CodTovara" />
+            </Principal>
+            <Dependent Role="LineOrder">
+              <PropertyRef Name="CodTovara(FK)" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Товар_Категория товара">
+          <End Role="CategoryTovara" Type="Self.CategoryTovara" Multiplicity="1" />
+          <End Role="Tovar" Type="Self.Tovar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CategoryTovara">
+              <PropertyRef Name="CategoryName" />
+            </Principal>
+            <Dependent Role="Tovar">
+              <PropertyRef Name="Category" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище foodshopModelContainer">
+          <EntitySet Name="CategoryTovara" EntityType="Self.CategoryTovara" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LineOrder" EntityType="Self.LineOrder" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LineWrite" EntityType="Self.LineWrite" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Postavshik" EntityType="Self.Postavshik" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tovar" EntityType="Self.Tovar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Worker" EntityType="Self.Worker" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Write" EntityType="Self.Write" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Order_Worker" Association="Self.FK_Order_Worker">
+            <End Role="Worker" EntitySet="Worker" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Заказ_Поставщик" Association="Self.FK_Заказ_Поставщик">
+            <End Role="Postavshik" EntitySet="Postavshik" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Заказ_Работник склада" Association="Self.FK_Заказ_Работник склада">
+            <End Role="Worker" EntitySet="Worker" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Списание_Работник склада" Association="Self.FK_Списание_Работник склада">
+            <End Role="Worker" EntitySet="Worker" />
+            <End Role="Write" EntitySet="Write" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Строка акта списания_Списание" Association="Self.FK_Строка акта списания_Списание">
+            <End Role="Write" EntitySet="Write" />
+            <End Role="LineWrite" EntitySet="LineWrite" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Строка акта списания_Товар" Association="Self.FK_Строка акта списания_Товар">
+            <End Role="Tovar" EntitySet="Tovar" />
+            <End Role="LineWrite" EntitySet="LineWrite" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Строка заказа_Заказ" Association="Self.FK_Строка заказа_Заказ">
+            <End Role="Order" EntitySet="Order" />
+            <End Role="LineOrder" EntitySet="LineOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Строка заказа_Товар" Association="Self.FK_Строка заказа_Товар">
+            <End Role="Tovar" EntitySet="Tovar" />
+            <End Role="LineOrder" EntitySet="LineOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Товар_Категория товара" Association="Self.FK_Товар_Категория товара">
+            <End Role="CategoryTovara" EntitySet="CategoryTovara" />
+            <End Role="Tovar" EntitySet="Tovar" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="foodshopModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CategoryTovara">
+          <Key>
+            <PropertyRef Name="CategoryName" />
+          </Key>
+          <Property Name="CategoryName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Tovar" Relationship="Self.FK_Товар_Категория_товара" FromRole="CategoryTovara" ToRole="Tovar" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="Number" />
+          </Key>
+          <Property Name="Number" Type="Int32" Nullable="false" />
+          <Property Name="DataOrder" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DataShipment" Type="DateTime" Precision="0" />
+          <Property Name="StatusOrder" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NameOrganizationPostavshik_FK_" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FIOworker_FK_" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Worker" Relationship="Self.FK_Order_Worker" FromRole="Order" ToRole="Worker" />
+          <NavigationProperty Name="Postavshik" Relationship="Self.FK_Заказ_Поставщик" FromRole="Order" ToRole="Postavshik" />
+          <NavigationProperty Name="Worker1" Relationship="Self.FK_Заказ_Работник_склада" FromRole="Order" ToRole="Worker" />
+          <NavigationProperty Name="LineOrder" Relationship="Self.FK_Строка_заказа_Заказ" FromRole="Order" ToRole="LineOrder" />
+        </EntityType>
+        <EntityType Name="Postavshik">
+          <Key>
+            <PropertyRef Name="NameOrganization" />
+          </Key>
+          <Property Name="NameOrganization" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FIOdirector" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="INN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NumberAccount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Order" Relationship="Self.FK_Заказ_Поставщик" FromRole="Postavshik" ToRole="Order" />
+        </EntityType>
+        <EntityType Name="Tovar">
+          <Key>
+            <PropertyRef Name="CodTovara" />
+          </Key>
+          <Property Name="CodTovara" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DateExpiration" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Category" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Price" Type="Double" Nullable="false" />
+          <NavigationProperty Name="CategoryTovara" Relationship="Self.FK_Товар_Категория_товара" FromRole="Tovar" ToRole="CategoryTovara" />
+          <NavigationProperty Name="LineWrite" Relationship="Self.FK_Строка_акта_списания_Товар" FromRole="Tovar" ToRole="LineWrite" />
+          <NavigationProperty Name="LineOrder" Relationship="Self.FK_Строка_заказа_Товар" FromRole="Tovar" ToRole="LineOrder" />
+          <Property Name="Count" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Worker">
+          <Key>
+            <PropertyRef Name="FIO" />
+          </Key>
+          <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FIO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Order" Relationship="Self.FK_Order_Worker" FromRole="Worker" ToRole="Order" />
+          <NavigationProperty Name="Order1" Relationship="Self.FK_Заказ_Работник_склада" FromRole="Worker" ToRole="Order" />
+          <NavigationProperty Name="Write" Relationship="Self.FK_Списание_Работник_склада" FromRole="Worker" ToRole="Write" />
+        </EntityType>
+        <EntityType Name="Write">
+          <Key>
+            <PropertyRef Name="NumberAct" />
+          </Key>
+          <Property Name="DataWrite" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="NumberAct" Type="Int32" Nullable="false" />
+          <Property Name="FIOworker_FK_" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Worker" Relationship="Self.FK_Списание_Работник_склада" FromRole="Write" ToRole="Worker" />
+          <NavigationProperty Name="LineWrite" Relationship="Self.FK_Строка_акта_списания_Списание" FromRole="Write" ToRole="LineWrite" />
+        </EntityType>
+        <EntityType Name="LineOrder">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="CountOrder" Type="Int32" Nullable="false" />
+          <Property Name="PurchasePrice" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CountShipment" Type="Int32" />
+          <Property Name="CodTovara_FK_" Type="Int32" Nullable="false" />
+          <Property Name="NumberOrder_FK_" Type="Int32" Nullable="false" />
+          <Property Name="DataManuf" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Order" Relationship="Self.FK_Строка_заказа_Заказ" FromRole="LineOrder" ToRole="Order" />
+          <NavigationProperty Name="Tovar" Relationship="Self.FK_Строка_заказа_Товар" FromRole="LineOrder" ToRole="Tovar" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="LineWrite">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="Summa" Type="Double" Nullable="false" />
+          <Property Name="Count" Type="Int32" Nullable="false" />
+          <Property Name="NumberActWrite_FK_" Type="Int32" Nullable="false" />
+          <Property Name="CodTovara_FK_" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Tovar" Relationship="Self.FK_Строка_акта_списания_Товар" FromRole="LineWrite" ToRole="Tovar" />
+          <NavigationProperty Name="Write" Relationship="Self.FK_Строка_акта_списания_Списание" FromRole="LineWrite" ToRole="Write" />
+          <Property Name="ID" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Товар_Категория_товара">
+          <End Role="CategoryTovara" Type="Self.CategoryTovara" Multiplicity="1" />
+          <End Role="Tovar" Type="Self.Tovar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CategoryTovara">
+              <PropertyRef Name="CategoryName" />
+            </Principal>
+            <Dependent Role="Tovar">
+              <PropertyRef Name="Category" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Worker">
+          <End Role="Worker" Type="Self.Worker" Multiplicity="1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Worker">
+              <PropertyRef Name="FIO" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="FIOworker_FK_" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Заказ_Поставщик">
+          <End Role="Postavshik" Type="Self.Postavshik" Multiplicity="1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Postavshik">
+              <PropertyRef Name="NameOrganization" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="NameOrganizationPostavshik_FK_" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Заказ_Работник_склада">
+          <End Role="Worker" Type="Self.Worker" Multiplicity="1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Worker">
+              <PropertyRef Name="FIO" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="FIOworker_FK_" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Строка_заказа_Заказ">
+          <End Role="Order" Type="Self.Order" Multiplicity="1" />
+          <End Role="LineOrder" Type="Self.LineOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="Number" />
+            </Principal>
+            <Dependent Role="LineOrder">
+              <PropertyRef Name="NumberOrder_FK_" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Строка_акта_списания_Товар">
+          <End Role="Tovar" Type="Self.Tovar" Multiplicity="1" />
+          <End Role="LineWrite" Type="Self.LineWrite" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tovar">
+              <PropertyRef Name="CodTovara" />
+            </Principal>
+            <Dependent Role="LineWrite">
+              <PropertyRef Name="CodTovara_FK_" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Строка_заказа_Товар">
+          <End Role="Tovar" Type="Self.Tovar" Multiplicity="1" />
+          <End Role="LineOrder" Type="Self.LineOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tovar">
+              <PropertyRef Name="CodTovara" />
+            </Principal>
+            <Dependent Role="LineOrder">
+              <PropertyRef Name="CodTovara_FK_" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Списание_Работник_склада">
+          <End Role="Worker" Type="Self.Worker" Multiplicity="1" />
+          <End Role="Write" Type="Self.Write" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Worker">
+              <PropertyRef Name="FIO" />
+            </Principal>
+            <Dependent Role="Write">
+              <PropertyRef Name="FIOworker_FK_" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Строка_акта_списания_Списание">
+          <End Role="Write" Type="Self.Write" Multiplicity="1" />
+          <End Role="LineWrite" Type="Self.LineWrite" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Write">
+              <PropertyRef Name="NumberAct" />
+            </Principal>
+            <Dependent Role="LineWrite">
+              <PropertyRef Name="NumberActWrite_FK_" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="foodshopEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CategoryTovara" EntityType="Self.CategoryTovara" />
+          <EntitySet Name="Order" EntityType="Self.Order" />
+          <EntitySet Name="Postavshik" EntityType="Self.Postavshik" />
+          <EntitySet Name="Tovar" EntityType="Self.Tovar" />
+          <EntitySet Name="Worker" EntityType="Self.Worker" />
+          <EntitySet Name="Write" EntityType="Self.Write" />
+          <EntitySet Name="LineOrder" EntityType="Self.LineOrder" />
+          <EntitySet Name="LineWrite" EntityType="Self.LineWrite" />
+          <AssociationSet Name="FK_Товар_Категория_товара" Association="Self.FK_Товар_Категория_товара">
+            <End Role="CategoryTovara" EntitySet="CategoryTovara" />
+            <End Role="Tovar" EntitySet="Tovar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Worker" Association="Self.FK_Order_Worker">
+            <End Role="Worker" EntitySet="Worker" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Заказ_Поставщик" Association="Self.FK_Заказ_Поставщик">
+            <End Role="Postavshik" EntitySet="Postavshik" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Заказ_Работник_склада" Association="Self.FK_Заказ_Работник_склада">
+            <End Role="Worker" EntitySet="Worker" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Строка_заказа_Заказ" Association="Self.FK_Строка_заказа_Заказ">
+            <End Role="Order" EntitySet="Order" />
+            <End Role="LineOrder" EntitySet="LineOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Строка_акта_списания_Товар" Association="Self.FK_Строка_акта_списания_Товар">
+            <End Role="Tovar" EntitySet="Tovar" />
+            <End Role="LineWrite" EntitySet="LineWrite" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Строка_заказа_Товар" Association="Self.FK_Строка_заказа_Товар">
+            <End Role="Tovar" EntitySet="Tovar" />
+            <End Role="LineOrder" EntitySet="LineOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Списание_Работник_склада" Association="Self.FK_Списание_Работник_склада">
+            <End Role="Worker" EntitySet="Worker" />
+            <End Role="Write" EntitySet="Write" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Строка_акта_списания_Списание" Association="Self.FK_Строка_акта_списания_Списание">
+            <End Role="Write" EntitySet="Write" />
+            <End Role="LineWrite" EntitySet="LineWrite" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище foodshopModelContainer" CdmEntityContainer="foodshopEntities">
+          <EntitySetMapping Name="CategoryTovara">
+            <EntityTypeMapping TypeName="foodshopModel.CategoryTovara">
+              <MappingFragment StoreEntitySet="CategoryTovara">
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Order">
+            <EntityTypeMapping TypeName="foodshopModel.Order">
+              <MappingFragment StoreEntitySet="Order">
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="DataOrder" ColumnName="DataOrder" />
+                <ScalarProperty Name="DataShipment" ColumnName="DataShipment" />
+                <ScalarProperty Name="StatusOrder" ColumnName="StatusOrder" />
+                <ScalarProperty Name="NameOrganizationPostavshik_FK_" ColumnName="NameOrganizationPostavshik(FK)" />
+                <ScalarProperty Name="FIOworker_FK_" ColumnName="FIOworker(FK)" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Postavshik">
+            <EntityTypeMapping TypeName="foodshopModel.Postavshik">
+              <MappingFragment StoreEntitySet="Postavshik">
+                <ScalarProperty Name="NameOrganization" ColumnName="NameOrganization" />
+                <ScalarProperty Name="FIOdirector" ColumnName="FIOdirector" />
+                <ScalarProperty Name="INN" ColumnName="INN" />
+                <ScalarProperty Name="NumberAccount" ColumnName="NumberAccount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tovar">
+            <EntityTypeMapping TypeName="foodshopModel.Tovar">
+              <MappingFragment StoreEntitySet="Tovar">
+                <ScalarProperty Name="Count" ColumnName="Count" />
+                <ScalarProperty Name="CodTovara" ColumnName="CodTovara" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="DateExpiration" ColumnName="DateExpiration" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Worker">
+            <EntityTypeMapping TypeName="foodshopModel.Worker">
+              <MappingFragment StoreEntitySet="Worker">
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="FIO" ColumnName="FIO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Write">
+            <EntityTypeMapping TypeName="foodshopModel.Write">
+              <MappingFragment StoreEntitySet="Write">
+                <ScalarProperty Name="DataWrite" ColumnName="DataWrite" />
+                <ScalarProperty Name="NumberAct" ColumnName="NumberAct" />
+                <ScalarProperty Name="FIOworker_FK_" ColumnName="FIOworker(FK)" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LineOrder">
+            <EntityTypeMapping TypeName="foodshopModel.LineOrder">
+              <MappingFragment StoreEntitySet="LineOrder">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CountOrder" ColumnName="CountOrder" />
+                <ScalarProperty Name="PurchasePrice" ColumnName="PurchasePrice" />
+                <ScalarProperty Name="CountShipment" ColumnName="CountShipment" />
+                <ScalarProperty Name="CodTovara_FK_" ColumnName="CodTovara(FK)" />
+                <ScalarProperty Name="NumberOrder_FK_" ColumnName="NumberOrder(FK)" />
+                <ScalarProperty Name="DataManuf" ColumnName="DataManuf" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LineWrite">
+            <EntityTypeMapping TypeName="foodshopModel.LineWrite">
+              <MappingFragment StoreEntitySet="LineWrite">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Summa" ColumnName="Summa" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
+                <ScalarProperty Name="NumberActWrite_FK_" ColumnName="NumberActWrite(FK)" />
+                <ScalarProperty Name="CodTovara_FK_" ColumnName="CodTovara(FK)" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

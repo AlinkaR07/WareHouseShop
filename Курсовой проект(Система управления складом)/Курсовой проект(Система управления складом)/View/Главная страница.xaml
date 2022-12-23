@@ -1,0 +1,208 @@
+﻿<Page x:Class="Курсовой_проект_Система_управления_складом_.View.Главная_страница"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Курсовой_проект_Система_управления_складом_.View"
+      xmlns:fa="http://schemas.fontawesome.io/icons/"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+       xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Title="Главная страница" Height="720" Width="1080">
+    <Page.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVis"/>
+    </Page.Resources>
+    <Border Background="#eff2f7" CornerRadius="30">
+        <!--MouseDown="Border_MouseDown_Write" MouseLeftButtonDown="Border_MouseLeftDown_Write"-->
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!--левое меню-->
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+            </Grid>
+
+            <Border Background="#623ed0" CornerRadius="0 50 0 30" Margin="0,0,855,0" Grid.ColumnSpan="2">
+                <DockPanel>
+
+                    <!--menu buttons-->
+
+                    <!--Menu Icon-->
+                    <ToggleButton  Margin="10 28 0 650" Style="{StaticResource topToggelebutton}">
+                        <Icon:PackIconMaterial Kind="Menu" Width="15" Height="15"/>
+                    </ToggleButton>
+
+                    <!--меню логин-->
+                    <Border Width="80" Height="80" Padding="3" Background="White" CornerRadius="100" DockPanel.Dock="Top" HorizontalAlignment="Left" Margin="20 100 0 0">
+                        <Ellipse>
+                            <Ellipse.Fill>
+                                <ImageBrush ImageSource="D:\ИГЭУ\3 курс, 1 семестр\Курсовой проект\Курсовой проект(Система управления складом)\Курсовой проект(Система управления складом)\Resources\logo.png"/>
+                            </Ellipse.Fill>
+                        </Ellipse>
+                    </Border>
+
+                    <!--menu titles-->
+                    <TextBlock Text="Прокофьева Е.И." Foreground="White" FontSize="22" FontWeight="SemiBold" DockPanel.Dock="Top" TextAlignment="Center" Margin="-50 25 0 10"/>
+                    <TextBlock Text="Работник склада" Foreground="#d0bfff" FontSize="14" FontWeight="SemiBold" DockPanel.Dock="Top" TextAlignment="Center" Margin="-50 0 0 0"/>
+
+                    <!--menu seprator-->
+
+                    <Separator Margin="-10 30 30 0" DockPanel.Dock="Top" Height="1.5" Background="#7e5fdc"/>
+
+                    <StackPanel DockPanel.Dock="Top" Margin="-40 0 0 0">
+                        <Button  Style="{StaticResource menuButton}">
+                            <StackPanel Orientation="Horizontal">
+                                <Icon:PackIconMaterial Kind="HomeVariant" Style="{StaticResource menuButtonIcon}"/>
+                                <TextBlock Text="Главная страница" Margin="0 0 10 0" Width="142"/>
+                            </StackPanel>
+                        </Button>
+
+                        <Button Style="{StaticResource menuButton}" Command="{Binding OpenTovarPage}">
+                            <StackPanel Orientation="Horizontal">
+                                <Icon:PackIconMaterial Kind="Food" Style="{StaticResource menuButtonIcon}"/>
+                                <TextBlock Text="Товары" Margin="0 0 10 0"/>
+                            </StackPanel>
+                        </Button>
+
+                        <Button Style="{StaticResource menuButton}" Command="{Binding OpenOrderPage}">
+                            <StackPanel Orientation="Horizontal">
+                                <Icon:PackIconMaterial Kind="CalendarClock" Style="{StaticResource menuButtonIcon}"/>
+                                <TextBlock Text="Заказы" Margin="0 0 10 0"/>
+                            </StackPanel>
+                        </Button>
+
+                        <Button Style="{StaticResource menuButton}">
+                            <StackPanel Orientation="Horizontal">
+                                <Icon:PackIconMaterial Kind="AccountMultipleOutline" Style="{StaticResource menuButtonIcon}"/>
+                                <TextBlock Text="Поставщики" Margin="0 0 10 0"/>
+                            </StackPanel>
+                        </Button>
+
+                        <Button Style="{StaticResource menuButton}" Command="{Binding OpenWritePage}">
+                            <StackPanel Orientation="Horizontal">
+                                <Icon:PackIconMaterial Kind="ApplicationEditOutline" Style="{StaticResource menuButtonIcon}"/>
+                                <TextBlock Text="Акты списания" Margin="0 0 10 0"/>
+                            </StackPanel>
+                        </Button>
+
+                        <Button Style="{StaticResource menuButton}" Command="{Binding OpenReportsPage}">
+                            <StackPanel Orientation="Horizontal">
+                                <Icon:PackIconMaterial Kind="BookCheckOutline" Style="{StaticResource menuButtonIcon}"/>
+                                <TextBlock Text="Отчеты" Margin="0 0 10 0"/>
+                            </StackPanel>
+                        </Button>
+
+
+                    </StackPanel>
+
+                    <!--<Button Style="{StaticResource menuButton}" VerticalAlignment="Bottom" DockPanel.Dock="Bottom" Margin="-20,0,89.8,20" HorizontalAlignment="Right" Click="ButtonClose_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <Icon:PackIconMaterial Kind="Logout" Style="{StaticResource menuButtonIcon}"/>
+                            <TextBlock Text="Logout" Margin="0 0 10 0"/>
+                        </StackPanel>
+                    </Button>-->
+                </DockPanel>
+            </Border>
+
+
+            <!--main Section-->
+            <Grid Grid.Column="1" Margin="30 20 20 20">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+
+
+                <!--Top button-->
+                <Button Style="{StaticResource topButton}" Margin="0,10,20,52.8"  HorizontalAlignment="Right" Click="ButtonCloseForm_Click" Grid.RowSpan="2">
+                    <Icon:PackIconMaterial Kind="WindowClose"/>
+                </Button>
+
+                <Button Style="{StaticResource topButton}" Margin="0,10,55,52.8" HorizontalAlignment="Right" Click="ButtonMinimized_Click" Grid.RowSpan="2" Height="Auto">
+                    <Icon:PackIconMaterial Kind="WindowMinimize"/>
+                </Button>
+
+
+                <!--Page Title-->
+                <TextBlock Text="Добрый день!" FontSize="32" FontWeight="SemiBold" Margin="308,46,308,0" 
+                           HorizontalAlignment="Center" Height="47" VerticalAlignment="Top"  Foreground="#121518" Grid.RowSpan="6"/>
+                <Grid Margin="0,5.2,0,242" Grid.Row="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1.2*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Border CornerRadius="20 0 0 20" Background="#fefefe" Margin="183,0,195.4,-83" Grid.ColumnSpan="2"/>
+                    <Border CornerRadius="0 20 20 0" Background="#623ed0" Margin="182.2,0,166.4,-83" Grid.Column="1"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Margin="184,0,-183.2,-67">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10,20,10.4,15" Width="478">
+                                <Button Style="{StaticResource buttonCalendar}">
+                                    <fa:ImageAwesome Icon="AngleLeft" Style="{StaticResource angle}"/>
+                                </Button>
+
+                                <Button Content="2019" Style="{StaticResource buttonCalendar}"/>
+                                <Button Content="2020" Style="{StaticResource buttonCalendar}"/>
+                                <Button Content="2021" Style="{StaticResource buttonCalendar}"/>
+                                <Button Content="2022" Style="{StaticResource buttonCalendar}" FontSize="20" Foreground="#623ed0"/>
+                                <Button Content="2023" Style="{StaticResource buttonCalendar}"/>
+                                <Button Content="2024" Style="{StaticResource buttonCalendar}"/>
+                                <Button Content="2025" Style="{StaticResource buttonCalendar}"/>
+
+
+                                <Button Style="{StaticResource buttonCalendar}">
+                                    <fa:ImageAwesome Icon="AngleRight" Style="{StaticResource angle}"/>
+                                </Button>
+                            </StackPanel>
+                            <!--Month Selection-->
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <Button Content="1" Style="{StaticResource buttonMonth}"/>
+                                <Button Content="2" Style="{StaticResource buttonMonth}"/>
+                                <Button Content="3" Style="{StaticResource buttonMonth}"/>
+                                <Button Content="4" Style="{StaticResource buttonMonth}"/>
+                                <Button Content="5" Style="{StaticResource buttonMonth}"/>
+                                <Button Content="6" Style="{StaticResource buttonMonth}"/>
+                                <Button Content="7" Style="{StaticResource buttonMonth}"/>
+                                <Button Content="8" Style="{StaticResource buttonMonth}"/>
+                                <Button Content="9" Style="{StaticResource buttonMonth}"/>
+                                <Button Content="10" Style="{StaticResource buttonMonth}"/>
+                                <Button Content="11" Style="{StaticResource buttonMonth}"/>
+                                <Button Content="12" Style="{StaticResource buttonMonth}" Foreground="#623ed0" FontWeight="SemiBold"/>
+                            </StackPanel>
+
+                            <Separator Height="1" Background="#4a148c" Margin="30 10"/>
+                            <TextBlock Text="Декабрь" Foreground="#623ed0" FontSize="24" TextAlignment="Center" FontWeight="SemiBold" Margin="0 0 0 10"/>
+
+                            <Calendar Style="{DynamicResource CalendarStyle1}" CalendarDayButtonStyle="{DynamicResource CalendarDayButtonStyle1}" CalendarItemStyle="{DynamicResource CalendarItemStyle1}" Height="252" Margin="0,0,0.4,0" />
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+
+                <TextBlock Text="Контакты" Grid.Row="5" FontSize="32" FontWeight="SemiBold" Margin="354,435.2,333,102"
+                          HorizontalAlignment="Center" Foreground="#121518"/>
+                <TextBlock Text="Номер телефона директора магазина: 8(920) 367 - 87 - 95" Grid.Row="5" FontSize="20" FontWeight="SemiBold" Margin="10,485.2,0,67"
+                          HorizontalAlignment="Left" Foreground="#121518"/>
+                <TextBlock Text="Номер телефона директора склада:     8(960) 353 - 21 - 64" Grid.Row="5" FontSize="20" FontWeight="SemiBold" Margin="10,520.2,0,32"
+                          HorizontalAlignment="Left" Foreground="#121518"/>
+            </Grid>
+        </Grid>
+    </Border>
+</Page>
